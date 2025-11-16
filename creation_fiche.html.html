@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Création de Fiche JDR</title>
+
+    <style>
+        @font-face {
+            font-family: 'HamletOrNot';
+            src: url('assets/HamletOrNot.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'HamletOrNot', serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('assets/un-groupe-d-aventuriers-fantastiques.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .content {
+            background: rgba(0, 0, 0, 0.60);
+            padding: 20px 24px 28px;
+            margin: 40px auto;
+            width: 85%;
+            max-width: 900px;
+            border-radius: 15px;
+            border: 2px solid #000;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 20px;
+        }
+
+        .form-section, .info-section {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            border: 1px solid #000;
+            padding: 15px 18px;
+        }
+
+        .form-section h2,
+        .info-section h2 {
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 6px 8px;
+            border-radius: 6px;
+            border: 1px solid #222;
+            font-family: 'HamletOrNot', serif;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        .radio-group {
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+
+        .radio-group label {
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        .button-row {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid #000;
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .info-section p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Création rapide de fiche</h1>
+        <p class="subtitle">
+            Choisissez le type de fiche et, si vous le souhaitez, un nom pour la version téléchargée.
+        </p>
+
+        <div class="form-grid">
+            <!-- Colonne formulaire -->
+            <div class="form-section">
+                <h2>Paramètres de la fiche</h2>
+
+                <label for="charName">Nom du personnage (optionnel) :</label>
+                <input type="text" id="charName" placeholder="Ex : Feyr, Jack, etc.">
+
+                <label for="charRace">Race (pour vous) :</label>
+                <input type="text" id="charRace" placeholder="Beast, Elfe noir, Humain...">
+
+                <label for="charAge">Âge (pour vous) :</label>
+                <input type="number" id="charAge" placeholder="Ex : 18">
+
+                <label>Type de fiche :</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="ficheType" value="passport" checked>
+                        Avec passeport
+                    </label>
+                    <label>
+                        <input type="radio" name="ficheType" value="no-passport">
+                        Sans passeport
+                    </label>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn" type="button" onclick="openSheet()">
+                        🌐 Ouvrir la fiche dans le navigateur
+                    </button>
+                    <button class="btn" type="button" onclick="downloadSheet()">
+                        ⬇️ Télécharger la fiche
+                    </button>
+                </div>
+
+                <a class="back-link" href="index.html">← Retour à la liste des fiches</a>
+            </div>
+
+            <!-- Colonne infos / aide -->
+            <div class="info-section">
+                <h2>Infos</h2>
+                <p>
+                    Cette page ne modifie pas le contenu des fiches : elle choisit simplement 
+                    le modèle (avec ou sans passeport) et peut proposer un nom de fichier basé 
+                    sur le nom du personnage pour le téléchargement.
+                </p>
+                <p>
+                    Une fois la fiche ouverte dans le navigateur, tout fonctionne comme d'habitude :
+                    système d’onglets, sauvegarde automatique, portrait, etc.
+                </p>
+                <p>
+                    Si vous téléchargez la fiche, vous obtiendrez une copie du modèle à ouvrir
+                    ensuite sur votre propre machine.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getSelectedType() {
+            const radios = document.querySelectorAll('input[name="ficheType"]');
+            for (const r of radios) {
+                if (r.checked) return r.value;
+            }
+            return 'passport';
+        }
+
+        function getTemplatePath() {
+            const type = getSelectedType();
+            if (type === 'passport') {
+                return 'fiches/fiche_personnage_modele_avec_passeport.html';
+            } else {
+                return 'fiches/fiche_personnage_modele_sans_passeport.html';
+            }
+        }
+
+        function openSheet() {
+            const url = getTemplatePath();
+            window.open(url, '_blank');
+        }
+
+        function downloadSheet() {
+            const url = getTemplatePath();
+            const nameInput = document.getElementById('charName');
+            const type = getSelectedType();
+
+            let baseName = (type === 'passport')
+                ? 'fiche_avec_passeport'
+                : 'fiche_sans_passeport';
+
+            let finalName = baseName + '.html';
+
+            if (nameInput && nameInput.value.trim() !== '') {
+                // Nom de fichier basé sur le nom du perso
+                const safeName = nameInput.value
+                    .trim()
+                    .replace(/\s+/g, '_')
+                    .replace(/[^A-Za-z0-9_-]/g, '');
+                if (safeName) {
+                    finalName = 'fiche_' + safeName + '.html';
+                }
+            }
+
+            // Création d'un lien de téléchargement temporaire
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = finalName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
